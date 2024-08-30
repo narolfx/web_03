@@ -2,25 +2,26 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #000;
+    background-color: #fff; /* Change background color to white */
     display: block; /* Allows vertical scrolling */
     overflow-y: auto; /* Allows vertical scrolling */
     height: auto; /* Auto height to accommodate content */
     width: 100vw;
 }
 
-/* Top Space */
-.top-space {
+/* Bottom Space */
+.bottom-space {
     width: 100%;
     text-align: left; /* Align text to the left */
-    padding: 2px 10px; /* Smaller padding to make the space smaller */
-    background-color: #000; /* Matches background */
-    color: white; /* Text color for project name */
+    padding: 10px; /* Padding to create space around the project name */
+    background-color: #fff; /* Background color matches the body */
+    color: black; /* Text color for project name */
     margin: 0; /* Remove margin to prevent additional space */
 }
 
 .project-name {
-    font-size: 14px; /* Smaller font size for a more compact look */
+    font-size: 16px; /* Adjust font size as needed */
+    margin-left: 10px; /* Add left margin to move text away from the edge */
 }
 
 /* Styles for Landscape Mode */
