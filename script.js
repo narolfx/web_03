@@ -17,9 +17,12 @@ const minSwipeDistance = 8; // Minimum distance required to detect a swipe
 
 // Function to update the image source based on the current index
 const updateImage = () => {
-  slideshowImage.src = `${currentIndex}.jpg`; // Set the image source to the current index
+  slideshowImage.src = `images/${currentIndex}.jpg`; // Set the image source to the current index in the images folder
   imageSlider.value = currentIndex; // Update the slider to match the current image
 };
+
+// Other JavaScript functions remain unchanged
+
 
 // Function to start the automatic slideshow
 const startSlideshow = () => {
