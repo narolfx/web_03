@@ -1,4 +1,3 @@
-// Existing JavaScript code remains unchanged
 const totalImages = 61; // Total number of images
 let currentIndex = 1; // Start from the first image
 const fps = 15; // Frames per second for automatic rotation
@@ -11,6 +10,11 @@ const zoomButton = document.getElementById('zoom-button');
 let slideshowInterval;
 let isPlaying = false; // Track whether the slideshow is playing
 let isZoomedIn = false; // Track zoom state
+
+// Variables for touch events
+let startX = 0;
+let endX = 0;
+let isSwiping = false;
 
 // Function to update the image source based on the current index
 function updateImage() {
@@ -83,6 +87,32 @@ function prevImage() {
     }
     updateImage();
 }
+
+// Improved touch swipe handlers
+slideshowImage.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+});
+
+slideshowImage.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    endX = e.touches[0].clientX;
+    let swipeDistance = endX - startX;
+    
+    // Update slider based on swipe distance
+    if (Math.abs(swipeDistance) > 30) { // If swipe is significant
+        if (swipeDistance > 0) { // Swipe right
+            prevImage();
+        } else { // Swipe left
+            nextImage();
+        }
+        startX = endX; // Reset start position for continuous swipe
+    }
+});
+
+slideshowImage.addEventListener('touchend', () => {
+    isSwiping = false; // Reset swiping state
+});
 
 // Event listeners for play/stop button
 playButton.addEventListener('click', toggleSlideshow);
