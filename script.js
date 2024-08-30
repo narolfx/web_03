@@ -1,17 +1,3 @@
-// Adjust container height to fit within the visible viewport
-function adjustHeight() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-    document.querySelector('.slideshow-container').style.height = `${window.innerHeight}px`; // Adjust height dynamically
-}
-
-// Event listeners to adjust on resize or orientation change
-window.addEventListener('resize', adjustHeight);
-window.addEventListener('orientationchange', adjustHeight);
-
-// Initial adjustment
-adjustHeight();
-
 // Existing JavaScript code remains unchanged
 const totalImages = 61; // Total number of images
 let currentIndex = 1; // Start from the first image
@@ -25,10 +11,6 @@ const zoomButton = document.getElementById('zoom-button');
 let slideshowInterval;
 let isPlaying = false; // Track whether the slideshow is playing
 let isZoomedIn = false; // Track zoom state
-let isDragging = false; // Track if the user is dragging the image
-let startX; // Store the initial X position when dragging starts
-let currentX; // Store the current X position during dragging
-let initialIndex; // Store the initial image index when dragging starts
 
 // Function to update the image source based on the current index
 function updateImage() {
@@ -85,82 +67,6 @@ function checkOrientation() {
     }
 }
 
-// Function to handle touch start
-function handleTouchStart(e) {
-    stopSlideshow(); // Stop automatic slideshow on manual control
-    isDragging = true;
-    startX = e.touches[0].clientX;
-    initialIndex = currentIndex;
-}
-
-// Function to handle touch move
-function handleTouchMove(e) {
-    if (!isDragging) return;
-    currentX = e.touches[0].clientX;
-    let deltaX = startX - currentX;
-    let imageChangeThreshold = window.innerWidth / totalImages; // Adjust for smoother transitions
-
-    if (Math.abs(deltaX) > imageChangeThreshold) {
-        if (deltaX > 0) {
-            currentIndex = initialIndex + Math.ceil(deltaX / imageChangeThreshold);
-        } else {
-            currentIndex = initialIndex + Math.floor(deltaX / imageChangeThreshold);
-        }
-
-        // Make rotation continuous
-        if (currentIndex > totalImages) {
-            currentIndex = ((currentIndex - 1) % totalImages) + 1; // Loop back to first image
-        } else if (currentIndex < 1) {
-            currentIndex = totalImages - ((-currentIndex) % totalImages); // Loop back to last image
-        }
-
-        updateImage();
-    }
-}
-
-// Function to handle touch end
-function handleTouchEnd() {
-    isDragging = false;
-}
-
-// Function to handle mouse down
-function handleMouseDown(e) {
-    stopSlideshow(); // Stop automatic slideshow on manual control
-    isDragging = true;
-    startX = e.clientX;
-    initialIndex = currentIndex;
-}
-
-// Function to handle mouse move
-function handleMouseMove(e) {
-    if (!isDragging) return;
-    currentX = e.clientX;
-    let deltaX = startX - currentX;
-    let imageChangeThreshold = window.innerWidth / totalImages; // Adjust for smoother transitions
-
-    if (Math.abs(deltaX) > imageChangeThreshold) {
-        if (deltaX > 0) {
-            currentIndex = initialIndex + Math.ceil(deltaX / imageChangeThreshold);
-        } else {
-            currentIndex = initialIndex + Math.floor(deltaX / imageChangeThreshold);
-        }
-
-        // Make rotation continuous
-        if (currentIndex > totalImages) {
-            currentIndex = ((currentIndex - 1) % totalImages) + 1; // Loop back to first image
-        } else if (currentIndex < 1) {
-            currentIndex = totalImages - ((-currentIndex) % totalImages); // Loop back to last image
-        }
-
-        updateImage();
-    }
-}
-
-// Function to handle mouse up
-function handleMouseUp() {
-    isDragging = false;
-}
-
 // Helper functions to navigate images manually
 function nextImage() {
     currentIndex++;
@@ -190,16 +96,6 @@ imageSlider.addEventListener('input', (e) => {
     currentIndex = parseInt(e.target.value); // Update index based on slider value
     updateImage();
 });
-
-// Event listeners for touchscreen control
-slideshowImage.addEventListener('touchstart', handleTouchStart);
-slideshowImage.addEventListener('touchmove', handleTouchMove);
-slideshowImage.addEventListener('touchend', handleTouchEnd);
-
-// Event listeners for mouse control
-slideshowImage.addEventListener('mousedown', handleMouseDown);
-document.addEventListener('mousemove', handleMouseMove);
-document.addEventListener('mouseup', handleMouseUp);
 
 // Event listeners to detect orientation change
 window.addEventListener('resize', checkOrientation);

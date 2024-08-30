@@ -3,20 +3,21 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     background-color: #fff; /* Change background color to white */
-    display: block; /* Allows vertical scrolling */
     overflow-y: auto; /* Allows vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
     height: auto; /* Auto height to accommodate content */
     width: 100vw;
 }
 
-/* Bottom Space */
-.bottom-space {
-    width: 100%;
+/* Top Space */
+.top-space {
+    width: 50%;
     text-align: left; /* Align text to the left */
     padding: 10px; /* Padding to create space around the project name */
     background-color: #fff; /* Background color matches the body */
     color: black; /* Text color for project name */
     margin: 0; /* Remove margin to prevent additional space */
+    position: relative;
 }
 
 .project-name {
@@ -24,12 +25,29 @@ body {
     margin-left: 10px; /* Add left margin to move text away from the edge */
 }
 
+/* Bottom Space */
+.bottom-space {
+    width: 50%;
+    text-align: left; /* Align text to the left */
+    padding: 10px; /* Padding to create space around the project info */
+    background-color: #fff; /* Background color matches the body */
+    color: black; /* Text color for project info */
+    margin: 0; /* Remove margin to prevent additional space */
+}
+
+.project-info {
+    font-size: 16px; /* Adjust font size as needed */
+    margin-left: 10px; /* Add left margin to move text away from the edge */
+}
+
 /* Styles for Landscape Mode */
 .slideshow-container {
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full viewport width */
+    height: calc(100vh - 40px); /* Adjust height to account for top and bottom spaces */
     overflow: hidden;
     position: relative;
+    
+    margin: 0;
 }
 
 .slideshow-container img {
@@ -80,7 +98,7 @@ body {
     text-align: center;
     padding: 20px;
     font-size: 24px;
-    color: white;
+    color: black; /* Changed text color to black */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,7 +109,7 @@ body {
 /* Rotate Icon Style */
 .rotate-icon {
     font-size: 40px; /* Size of the rotate icon */
-    color: white;
+    color: black; /* Changed rotate icon color to black */
     animation: rotate-animation 2s infinite linear; /* Rotating animation */
 }
 
