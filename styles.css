@@ -1,65 +1,104 @@
-body, html {
+body {
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Prevent scrollbars from appearing */
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Background color */
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Position for sliders placement */
+    height: 100vh;
+    overflow: hidden; /* Prevents scrolling */
 }
 
-/* Common styles for images */
-.image-desktop,
-.image-mobile {
+/* Styles for Landscape Mode */
+.slideshow-container {
+    display: none; /* Hidden by default */
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.slideshow-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image covers the entire viewport */
+    object-fit: cover; /* Covers entire container */
     position: absolute;
-    top: 0;
-    left: 0;
-    display: none; /* Hide both images by default */
 }
 
-/* Show desktop image on larger screens and make it full screen */
-@media (min-width: 768px) {
-    #image-desktop {
-        display: block; /* Show desktop image */
-    }
+/* Controls Container */
+.controls-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%; /* Set the container width to 40% */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out the buttons and slider */
+    padding: 0 10px; /* Add some padding if needed */
+}
 
-    .slider-desktop {
-        display: block; /* Show slider for desktop */
-        position: absolute;
-        bottom: 20px; /* Position at the bottom of the screen */
-        left: 50%; /* Center horizontally */
-        transform: translateX(-50%); /* Adjust for perfect centering */
-        width: 50%; /* Slider width */
-        z-index: 10; /* Ensure slider appears above image */
-    }
+/* Slider Styles */
+.image-slider {
+    width: 80%; /* Width for the slider within the 40% container */
+    margin: 0 10px; /* Spacing between buttons and slider */
+}
 
-    .slider-mobile {
-        display: none; /* Hide mobile slider on desktop */
+/* Button Styles */
+.control-button {
+    padding: 8px 12px;
+    font-size: 18px; /* Larger font size for the icons */
+    color: rgba(0, 0, 0, 0.65); /* Button text color with 65% transparency */
+    background-color: transparent; /* Button background color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Styles for Portrait Mode */
+.portrait-message {
+    display: none; /* Hidden by default */
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Spacing between text and icon */
+}
+
+/* Rotate Icon Style */
+.rotate-icon {
+    font-size: 40px; /* Size of the rotate icon */
+    color: white;
+    animation: rotate-animation 2s infinite linear; /* Rotating animation */
+}
+
+/* Rotate animation */
+@keyframes rotate-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }
 
-/* Show mobile image on smaller screens and make it full screen */
-@media (max-width: 767px) {
-    #image-mobile {
-        display: block; /* Show mobile image */
+/* Media queries to handle orientation */
+@media only screen and (orientation: landscape) {
+    .slideshow-container {
+        display: block; /* Show the slideshow in landscape mode */
     }
+}
 
-    .slider-mobile {
-        display: block; /* Show slider for mobile */
-        position: absolute;
-        bottom: 50%; /* Center slider vertically in rotated mode */
-        left: 5%; /* Center horizontally */
-        transform: translate(-50%, 50%) rotate(90deg); /* Center and rotate the slider */
-        width: 50vh; /* Slider width adjusted for rotation */
-        z-index: 10; /* Ensure slider appears above image */
-    }
-
-    .slider-desktop {
-        display: none; /* Hide desktop slider on mobile */
+@media only screen and (orientation: portrait) {
+    .portrait-message {
+        display: flex; /* Show the portrait message in portrait mode */
     }
 }

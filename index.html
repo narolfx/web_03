@@ -4,21 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landscape Mode Image Slideshow</title>
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <title>Responsive Image Slider</title>
 </head>
 <body>
-    <!-- Desktop Image -->
-    <img id="image-desktop" class="image-desktop" alt="Desktop Image">
+    <!-- Image Slideshow Container for Landscape Mode -->
+    <div class="slideshow-container">
+        <img id="slideshow-image" src="1.jpg" alt="Slideshow Image">
+        
+        <!-- Slider and Buttons Container -->
+        <div class="controls-container">
+            <button id="zoom-button" class="control-button">
+                <i class="fas fa-search-plus"></i>
+            </button>
+            <input type="range" id="image-slider" class="image-slider" min="1" max="61" value="1">
+            <button id="play-button" class="control-button">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+    </div>
 
-    <!-- Mobile Image -->
-    <img id="image-mobile" class="image-mobile" alt="Mobile Image">
-
-    <!-- Slider for Desktop Mode -->
-    <input type="range" min="1" max="61" value="1" id="slider-desktop" class="slider slider-desktop">
-
-    <!-- Slider for Mobile Mode (Portrait) -->
-    <input type="range" min="1" max="61" value="1" id="slider-mobile" class="slider slider-mobile">
+    <!-- Message for Portrait Mode -->
+    <div class="portrait-message">
+        <p>Please rotate your device to landscape mode.</p>
+        <i class="fas fa-rotate-right rotate-icon"></i> <!-- Rotate icon added here -->
+    </div>
 
     <script src="script.js"></script>
 </body>
