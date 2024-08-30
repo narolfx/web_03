@@ -5,7 +5,7 @@ body {
     background-color: #fff; /* Change background color to white */
     overflow-y: auto; /* Allows vertical scrolling */
     overflow-x: hidden; /* Prevent horizontal scrolling */
-    height: auto; /* Auto height to accommodate content */
+    height:  auto; /* Auto height to accommodate content */
     width: 100vw;
 }
 
@@ -45,7 +45,7 @@ body {
 /* Styles for Landscape Mode */
 .slideshow-container {
     width: 100vw; /* Full viewport width */
-    height: calc(100vh - 40px); /* Adjust height to account for top and bottom spaces */
+    height:  100vh   ; /* Adjust height to account for top and bottom spaces */
     overflow: hidden;
     position: relative;
     
@@ -78,8 +78,11 @@ body {
 .image-slider {
     width: 80%; /* Width for the slider within the 40% container */
     margin: 0 10px; /* Spacing between buttons and slider */
+    background: lightgray; /* Gray color for the slider track */
+    appearance: gray; /* Keep the standard browser appearance */
 }
-
+ 
+ 
 /* Button Styles */
 .control-button {
     padding: 8px 12px;
