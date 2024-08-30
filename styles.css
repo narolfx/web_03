@@ -23,6 +23,7 @@ body {
 .project-name {
     font-size: 16px; /* Adjust font size as needed */
     margin-left: 10px; /* Add left margin to move text away from the edge */
+    display: none;
 }
 
 /* Bottom Space */
@@ -38,11 +39,12 @@ body {
 .project-info {
     font-size: 16px; /* Adjust font size as needed */
     margin-left: 10px; /* Add left margin to move text away from the edge */
+    display: none;
 }
 
 /* Styles for Landscape Mode */
 .slideshow-container {
-    width: 100%; /* Full viewport width */
+    width: 100vw; /* Full viewport width */
     height: calc(100vh - 40px); /* Adjust height to account for top and bottom spaces */
     overflow: hidden;
     position: relative;
@@ -129,9 +131,23 @@ body {
         display: block; /* Show the slideshow in landscape mode */
     }
 }
+/* Media queries to handle orientation */
+@media only screen and (orientation: landscape) {
+    .project-name {
+        display: block; /* Show the slideshow in landscape mode */
+    }
+}
+
+/* Media queries to handle orientation */
+@media only screen and (orientation: landscape) {
+    .project-info {
+        display: block; /* Show the slideshow in landscape mode */
+    }
+}
 
 @media only screen and (orientation: portrait) {
     .portrait-message {
         display: flex; /* Show the portrait message in portrait mode */
     }
 }
+
