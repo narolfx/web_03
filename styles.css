@@ -28,7 +28,7 @@ body, html {
     width: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better visibility */
+    background-color:transparent; /* Semi-transparent background for better visibility */
     z-index: 1000; /* Ensure the header stays on top of other content */
     box-sizing: border-box; /* Ensure padding is included in the width calculation */
 }
@@ -57,8 +57,8 @@ body, html {
 /* Navigation Icon Styling */
 .nav-icon {
     display: block;
-    width: 24px; /* Adjust size to fit within margins */
-    height: 24px;
+    width: 22px; /* Adjust size to fit within margins */
+    height: 22px;
     text-decoration: none;
     margin-left: auto; /* Align icon to the right edge */
     margin-right: 10px; /* Add margin to the right for spacing */
@@ -96,7 +96,7 @@ body, html {
 @media (max-width: 768px) {
     /* Adjustments for tablets and smaller devices */
     .logo img {
-        width: 60px; /* Smaller logo for tablets */
+        width: 80px; /* Smaller logo for tablets */
     }
 
     .nav-icon {
@@ -118,7 +118,7 @@ body, html {
 @media (max-width: 480px) {
     /* Adjustments for mobile devices */
     .logo img {
-        width: 50px; /* Even smaller logo for mobile */
+        width: 60px; /* Even smaller logo for mobile */
     }
 
     .nav-icon {
