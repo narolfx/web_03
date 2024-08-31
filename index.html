@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Screen Video with Header</title>
+    <!-- Include Font Awesome Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <!-- Wrap the logo image in a button element -->
+            <button class="logo-button">
+                <img src="assets/icons/logo.png" alt="Logo">
+            </button>
+        </div>
+        <nav class="navigation">
+            <a href="index.html" class="nav-icon">
+                <img src="assets/icons/home-icon.png" alt="Home Icon">
+            </a>
+        </nav>
+    </header>
+
+    <!-- Full-Screen Video -->
+    <video autoplay muted loop id="background-video">
+        <source src="your-video.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Central 360 Button using Font Awesome -->
+    <div class="center-button">
+        <!-- Update the href to point to the correct path -->
+        <a href="pages/different-page.html" class="button-360">
+            <i class="fas fa-sync-alt"></i> <!-- Font Awesome 360-degree icon -->
+        </a>
+    </div>
+</body>
+</html>
