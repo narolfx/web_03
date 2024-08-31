@@ -1,14 +1,24 @@
-body {
+/* General Full-Screen Video Styling */
+body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #fff; /* Change background color to white */
-    overflow-y: auto; /* Allows vertical scrolling */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    height:  auto; /* Auto height to accommodate content */
-    width: 100vw;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
-/* Sticky Header styling */
+
+#background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* Cover the area without stretching */
+}
+
+/* Sticky Header Styling */
 .header {
     display: flex;
     justify-content: space-between;
@@ -18,12 +28,12 @@ body {
     width: 100%;
     top: 0;
     left: 0;
-    background-color: transparent; /* Transparent background */
+    background-color:transparent; /* Semi-transparent background for better visibility */
     z-index: 1000; /* Ensure the header stays on top of other content */
     box-sizing: border-box; /* Ensure padding is included in the width calculation */
 }
 
-/* Logo button styling */
+/* Logo Button Styling */
 .logo-button {
     background: none; /* Remove default button background */
     border: none; /* Remove default button border */
@@ -33,192 +43,123 @@ body {
 }
 
 .logo img {
-    width: 100px; /* Adjust size as needed */
+    width: 80px; /* Adjust size for responsiveness */
     display: block; /* Prevent image from being inline-block (removes extra space) */
+    height: auto; /* Maintain aspect ratio */
 }
 
-/* Navigation styling */
+/* Navigation Styling */
 .navigation {
     display: flex;
     align-items: center;
 }
 
-/* Navigation icon styling */
+/* Navigation Icon Styling */
 .nav-icon {
     display: block;
-    width: 24px; /* Adjust size to fit within margins */
-    height: 24px;
+    width: 22px; /* Adjust size to fit within margins */
+    height: 22px;
     text-decoration: none;
     margin-left: auto; /* Align icon to the right edge */
     margin-right: 10px; /* Add margin to the right for spacing */
 }
 
-/* Styling for navigation icons */
+/* Styling for Navigation Icons */
 .nav-icon img {
     width: 100%;
     height: auto;
 }
 
-
-
-/* Top Space */
-.top-space {
-    width: 50%;
-    text-align: left; /* Align text to the left */
-    height: 40px;
-    padding: 10px; /* Padding to create space around the project name */
-    background-color: #fff; /* Background color matches the body */
-    color: black; /* Text color for project name */
-    margin: 0; /* Remove margin to prevent additional space */
-    position: relative;
-}
-
- 
-
-/* Bottom Space */
-.bottom-space {
-    width: 50%;
-    text-align: left; /* Align text to the left */
-    padding: 10px; /* Padding to create space around the project info */
-    background-color: #fff; /* Background color matches the body */
-    color: black; /* Text color for project info */
-    margin: 0; /* Remove margin to prevent additional space */
-}
-
-/* Project Information Section */
-.project-info-section {
-    display: flex; /* Flexbox for two-column layout */
-    justify-content: space-around; /* Space out columns */
-    margin-top: 20px; /* Add some margin on top */
-    padding: 20px; /* Add padding */
-    background-color: white; /* Background color to match the design */
-}
-
-.info-column {
-    width: 45%; /* Each column takes 45% of the container width */
-    font-size: 16px; /* Font size for readability */
-    line-height: 1.5; /* Line height for spacing between lines */
-    color: #000; /* Text color */
-}
-
-.info-column p {
-    margin-bottom: 15px; /* Spacing between paragraphs */
-}
-
-.info-column strong {
-    font-weight: bold; /* Bold text for the labels */
-}
-
-
-/* Styles for Landscape Mode */
-.slideshow-container {
-    width: 100vw; /* Full viewport width */
-    height:  100vh   ; /* Adjust height to account for top and bottom spaces */
-    overflow: hidden;
-    position: relative;
-    
-    margin: 0;
-}
-
-.slideshow-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Covers entire container */
+/* Central 360 Button Styling */
+.center-button {
     position: absolute;
-    top: 0;
-    left: 0;
-}
-
-/* Controls Container */
-.controls-container {
-    position: absolute;
-    bottom: 20px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    width: 40%; /* Set the container width to 40% */
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Space out the buttons and slider */
-    padding: 0 10px; /* Add some padding if needed */
+    transform: translate(-50%, -50%);
+    z-index: 2000; /* Above the video and header */
 }
 
-/* Slider Styles */
-.image-slider {
-    width: 80%; /* Width for the slider within the 40% container */
-    margin: 0 10px; /* Spacing between buttons and slider */
-    background: lightgray; /* Gray color for the slider track */
-    appearance: gray; /* Keep the standard browser appearance */
-}
- 
- 
-/* Button Styles */
-.control-button {
-    padding: 8px 12px;
-    font-size: 18px; /* Larger font size for the icons */
-    color: rgba(0, 0, 0, 0.65); /* Button text color with 65% transparency */
-    background-color: transparent; /* Button background color */
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+.button-360 {
     display: flex;
-    align-items: center;
     justify-content: center;
-}
-
-/* Styles for Portrait Mode */
-.portrait-message {
-    display: none; /* Hidden by default */
-    text-align: center;
-    padding: 20px;
-    font-size: 24px;
-    color: black; /* Changed text color to black */
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 10px; /* Spacing between text and icon */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    border-radius: 50%; /* Make the button circular */
+    width: 80px; /* Button width */
+    height: 80px; /* Button height */
+    text-decoration: none; /* Remove underline from link */
+    font-size: 30px; /* Adjust icon size */
+    color: #000; /* Icon color */
 }
 
-/* Rotate Icon Style */
-.rotate-icon {
-    font-size: 40px; /* Size of the rotate icon */
-    color: black; /* Changed rotate icon color to black */
-    animation: rotate-animation 2s infinite linear; /* Rotating animation */
-}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    /* Adjustments for tablets and smaller devices */
+    .logo img {
+        width: 80px; /* Smaller logo for tablets */
+    }
 
-/* Rotate animation */
-@keyframes rotate-animation {
-    0% {
-        transform: rotate(0deg);
+    .nav-icon {
+        width: 20px; /* Smaller navigation icon */
+        height: 20px;
     }
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
-/* Media queries to handle orientation */
-@media only screen and (orientation: landscape) {
-    .slideshow-container {
-        display: block; /* Show the slideshow in landscape mode */
+    .header {
+        padding: 5px 15px; /* Reduce padding */
     }
-}
-/* Media queries to handle orientation */
-@media only screen and (orientation: landscape) {
-    .project-name {
-        display: block; /* Show the slideshow in landscape mode */
+
+    .button-360 {
+        width: 60px; /* Smaller button size */
+        height: 60px;
+        font-size: 24px; /* Adjust icon size */
     }
 }
 
-/* Media queries to handle orientation */
-@media only screen and (orientation: landscape) {
-    .project-info {
-        display: block; /* Show the slideshow in landscape mode */
+@media (max-width: 480px) {
+    /* Adjustments for mobile devices */
+    .logo img {
+        width: 60px; /* Even smaller logo for mobile */
+    }
+
+    .nav-icon {
+        width: 18px; /* Smaller navigation icon */
+        height: 18px;
+    }
+
+    .header {
+        flex-direction: row; /* Keep items horizontally aligned */
+        justify-content: space-between; /* Space items evenly in header */
+        align-items: center; /* Align items to the center */
+        padding: 10px; /* Adjust padding */
+        width: 100%; /* Ensure header width is 100% */
+    }
+
+    .navigation {
+        margin-top: 0; /* Remove space between logo and navigation */
+    }
+
+    .button-360 {
+        width: 50px; /* Smaller button size for mobile */
+        height: 50px;
+        font-size: 20px; /* Adjust icon size */
     }
 }
 
-@media only screen and (orientation: portrait) {
-    .portrait-message {
-        display: flex; /* Show the portrait message in portrait mode */
+/* Portrait Mode for Mobile Phones */
+@media (max-width: 480px) and (orientation: portrait) {
+    #background-video {
+        width: 100%; /* Make sure video width fills the screen */
+        height: 100%; /* Ensure video height fills the screen */
+        object-fit: cover; /* Cover the screen without stretching */
     }
 }
 
+/* Landscape Mode for Mobile Phones */
+@media (max-width: 480px) and (orientation: landscape) {
+    #background-video {
+        width: 100%; /* Fit video to the screen width */
+        height: auto; /* Adjust height to maintain aspect ratio */
+        max-height: 100%; /* Ensure video does not overflow the height */
+        object-fit: cover; /* Cover the screen without stretching */
+    }
+}
