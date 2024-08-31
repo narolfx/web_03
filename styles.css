@@ -1,0 +1,165 @@
+/* General Full-Screen Video Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* Cover the area without stretching */
+}
+
+/* Sticky Header Styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better visibility */
+    z-index: 1000; /* Ensure the header stays on top of other content */
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+}
+
+/* Logo Button Styling */
+.logo-button {
+    background: none; /* Remove default button background */
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.logo img {
+    width: 80px; /* Adjust size for responsiveness */
+    display: block; /* Prevent image from being inline-block (removes extra space) */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Navigation Styling */
+.navigation {
+    display: flex;
+    align-items: center;
+}
+
+/* Navigation Icon Styling */
+.nav-icon {
+    display: block;
+    width: 24px; /* Adjust size to fit within margins */
+    height: 24px;
+    text-decoration: none;
+    margin-left: auto; /* Align icon to the right edge */
+    margin-right: 10px; /* Add margin to the right for spacing */
+}
+
+/* Styling for Navigation Icons */
+.nav-icon img {
+    width: 100%;
+    height: auto;
+}
+
+/* Central 360 Button Styling */
+.center-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000; /* Above the video and header */
+}
+
+.button-360 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    border-radius: 50%; /* Make the button circular */
+    width: 80px; /* Button width */
+    height: 80px; /* Button height */
+    text-decoration: none; /* Remove underline from link */
+    font-size: 30px; /* Adjust icon size */
+    color: #000; /* Icon color */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    /* Adjustments for tablets and smaller devices */
+    .logo img {
+        width: 60px; /* Smaller logo for tablets */
+    }
+
+    .nav-icon {
+        width: 20px; /* Smaller navigation icon */
+        height: 20px;
+    }
+
+    .header {
+        padding: 5px 15px; /* Reduce padding */
+    }
+
+    .button-360 {
+        width: 60px; /* Smaller button size */
+        height: 60px;
+        font-size: 24px; /* Adjust icon size */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjustments for mobile devices */
+    .logo img {
+        width: 50px; /* Even smaller logo for mobile */
+    }
+
+    .nav-icon {
+        width: 18px; /* Smaller navigation icon */
+        height: 18px;
+    }
+
+    .header {
+        flex-direction: row; /* Keep items horizontally aligned */
+        justify-content: space-between; /* Space items evenly in header */
+        align-items: center; /* Align items to the center */
+        padding: 10px; /* Adjust padding */
+        width: 100%; /* Ensure header width is 100% */
+    }
+
+    .navigation {
+        margin-top: 0; /* Remove space between logo and navigation */
+    }
+
+    .button-360 {
+        width: 50px; /* Smaller button size for mobile */
+        height: 50px;
+        font-size: 20px; /* Adjust icon size */
+    }
+}
+
+/* Portrait Mode for Mobile Phones */
+@media (max-width: 480px) and (orientation: portrait) {
+    #background-video {
+        width: 100%; /* Make sure video width fills the screen */
+        height: 100%; /* Ensure video height fills the screen */
+        object-fit: cover; /* Cover the screen without stretching */
+    }
+}
+
+/* Landscape Mode for Mobile Phones */
+@media (max-width: 480px) and (orientation: landscape) {
+    #background-video {
+        width: 100%; /* Fit video to the screen width */
+        height: auto; /* Adjust height to maintain aspect ratio */
+        max-height: 100%; /* Ensure video does not overflow the height */
+        object-fit: cover; /* Cover the screen without stretching */
+    }
+}
