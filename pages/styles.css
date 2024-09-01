@@ -5,9 +5,10 @@ body {
     background-color: #fff; /* Change background color to white */
     overflow-y: auto; /* Allows vertical scrolling */
     overflow-x: hidden; /* Prevent horizontal scrolling */
-    height:  auto; /* Auto height to accommodate content */
+    height: auto; /* Auto height to accommodate content */
     width: 100vw;
 }
+
 /* Sticky Header styling */
 .header {
     display: flex;
@@ -18,9 +19,10 @@ body {
     width: 100%;
     top: 0;
     left: 0;
-    background-color: transparent; /* Transparent background */
+    background-color: transparent; /* Semi-transparent background for better visibility */
     z-index: 1000; /* Ensure the header stays on top of other content */
     box-sizing: border-box; /* Ensure padding is included in the width calculation */
+    backdrop-filter: blur(0); /* Blur effect for the background */
 }
 
 /* Logo button styling */
@@ -36,74 +38,6 @@ body {
     width: 80px; /* Adjust size as needed */
     display: block; /* Prevent image from being inline-block (removes extra space) */
 }
-/* Loading Overlay */
-.loading-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000; /* Higher than slideshow image */
-}
-
-/* Spinner Style */
-.spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1); /* Light grey */
-    border-left-color: #000; /* Black */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite; /* Spinner animation */
-}
-
-/* Spinner Animation */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Hide the overlay after loading */
-.loading-overlay.hidden {
-    display: none;
-}
-
-/* Existing Styles */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #fff;
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: auto;
-    width: 100vw;
-}
-
-/* Slideshow Container */
-.slideshow-container {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
-    margin: 0;
-}
-
-.slideshow-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-/* Additional existing styles... */
-
-
 
 /* Navigation styling */
 .navigation {
@@ -127,8 +61,6 @@ body {
     height: auto;
 }
 
-
-
 /* Top Space */
 .top-space {
     width: 50%;
@@ -140,8 +72,6 @@ body {
     margin: 0; /* Remove margin to prevent additional space */
     position: relative;
 }
-
- 
 
 /* Bottom Space */
 .bottom-space {
@@ -177,14 +107,12 @@ body {
     font-weight: bold; /* Bold text for the labels */
 }
 
-
 /* Styles for Landscape Mode */
 .slideshow-container {
     width: 100vw; /* Full viewport width */
-    height:  100vh   ; /* Adjust height to account for top and bottom spaces */
+    height: 100vh; /* Full viewport height */
     overflow: hidden;
-    position: relative;
-    
+    position: relative; /* Make the container position relative */
     margin: 0;
 }
 
@@ -195,35 +123,53 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for zooming */
 }
 
 /* Controls Container */
 .controls-container {
-    position: absolute;
-    bottom: 20px;
+    position: relative; /* Position relative to the slideshow container */
+    bottom: 45px; /* Position at the bottom of the slideshow container */
     left: 50%;
     transform: translateX(-50%);
-    width: 40%; /* Set the container width to 40% */
-    display: flex;
+    width: 60%; /* Set the container width to 60% */
+    display: none; /* Hidden by default to show only in landscape */
     align-items: center;
     justify-content: space-between; /* Space out the buttons and slider */
-    padding: 0 10px; /* Add some padding if needed */
+    padding: 0px 20px; /* Add some padding */
+    background-color:  rgba(255, 255, 255, 0.85); /* Semi-transparent background for controls */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    box-shadow: /*0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
 /* Slider Styles */
 .image-slider {
-    width: 80%; /* Width for the slider within the 40% container */
+    width: 80%; /* Width for the slider within the 60% container */
     margin: 0 10px; /* Spacing between buttons and slider */
     background: lightgray; /* Gray color for the slider track */
-    appearance: gray; /* Keep the standard browser appearance */
+    appearance: none; /* Remove default slider appearance */
+    height: 5px; /* Adjust slider height */
+    border-radius: 5px; /* Rounded corners for the slider */
 }
- 
- 
+
+.image-slider::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+    background-color: #333; /* Thumb color */
+    border-radius: 50%; /* Rounded thumb */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.image-slider::-webkit-slider-thumb:hover {
+    background-color: #555; /* Darker thumb color on hover */
+}
+
 /* Button Styles */
 .control-button {
     padding: 8px 12px;
     font-size: 18px; /* Larger font size for the icons */
-    color: rgba(0, 0, 0, 0.65); /* Button text color with 65% transparency */
+    color: rgba(0, 0, 0, 0.8); /* Button text color with higher visibility */
     background-color: transparent; /* Button background color */
     border: none;
     cursor: pointer;
@@ -231,6 +177,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.control-button:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
+    color: rgba(0, 0, 0, 1); /* Full opacity text color on hover */
 }
 
 /* Styles for Portrait Mode */
@@ -239,7 +191,7 @@ body {
     text-align: center;
     padding: 20px;
     font-size: 24px;
-    color: black; /* Changed text color to black */
+    color: black; /* Text color */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -250,7 +202,7 @@ body {
 /* Rotate Icon Style */
 .rotate-icon {
     font-size: 40px; /* Size of the rotate icon */
-    color: black; /* Changed rotate icon color to black */
+    color: black; /* Rotate icon color */
     animation: rotate-animation 2s infinite linear; /* Rotating animation */
 }
 
@@ -269,18 +221,18 @@ body {
     .slideshow-container {
         display: block; /* Show the slideshow in landscape mode */
     }
-}
-/* Media queries to handle orientation */
-@media only screen and (orientation: landscape) {
-    .project-name {
-        display: block; /* Show the slideshow in landscape mode */
-    }
-}
 
-/* Media queries to handle orientation */
-@media only screen and (orientation: landscape) {
-    .project-info {
-        display: block; /* Show the slideshow in landscape mode */
+    .controls-container {
+        display: flex; /* Show controls only in landscape mode */
+    }
+
+    .logo img {
+        width: 65px; /* Adjusted size for landscape */
+    }
+
+    .nav-icon {
+        width: 18px; /* Adjusted size for landscape */
+        height: 18px;
     }
 }
 
@@ -288,7 +240,12 @@ body {
     .portrait-message {
         display: flex; /* Show the portrait message in portrait mode */
     }
+
+    .controls-container {
+        display: none; /* Hide controls in portrait mode */
+    }
 }
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     /* Adjustments for tablets and smaller devices */
@@ -305,17 +262,24 @@ body {
         padding: 5px 15px; /* Reduce padding */
     }
 
-    .button-360 {
-        width: 60px; /* Smaller button size */
-        height: 60px;
-        font-size: 24px; /* Adjust icon size */
+    .control-button {
+        font-size: 16px; /* Smaller font size for icons on smaller screens */
+    }
+
+    .controls-container {
+        width: 70%; /* Adjust width for better usability on smaller screens */
+        bottom: 10px; /* Move controls up slightly on smaller screens */
+    }
+
+    .image-slider {
+        width: 70%; /* Adjust width for smaller screens */
     }
 }
 
 @media (max-width: 480px) {
     /* Adjustments for mobile devices */
     .logo img {
-        width: 50px; /* Even smaller logo for mobile */
+        width: 70px; /* Even smaller logo for mobile */
     }
 
     .nav-icon {
@@ -324,38 +288,20 @@ body {
     }
 
     .header {
-        flex-direction: row; /* Keep items horizontally aligned */
-        justify-content: space-between; /* Space items evenly in header */
-        align-items: center; /* Align items to the center */
         padding: 10px; /* Adjust padding */
         width: 100%; /* Ensure header width is 100% */
     }
 
-    .navigation {
-        margin-top: 0; /* Remove space between logo and navigation */
+    .controls-container {
+        width: 90%; /* Full width for better control accessibility */
+        bottom: 15px; /* Adjust bottom margin for mobile */
     }
 
-    
-}
-/* Media queries to handle orientation */
-@media only screen and (orientation: landscape) {
-    /* Adjustments for tablets and smaller devices */
-    .logo img {
-        width: 80px; /* Smaller logo for tablets */
+    .image-slider {
+        width: 65%; /* Adjust slider width for mobile */
     }
 
-    .nav-icon {
-        width: 20px; /* Smaller navigation icon */
-        height: 20px;
-    }
-
-    .header {
-        padding: 5px 15px; /* Reduce padding */
-    }
-
-    .button-360 {
-        width: 60px; /* Smaller button size */
-        height: 60px;
-        font-size: 24px; /* Adjust icon size */
+    .control-button {
+        font-size: 14px; /* Smaller font size for mobile */
     }
 }
