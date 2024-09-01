@@ -36,6 +36,73 @@ body {
     width: 80px; /* Adjust size as needed */
     display: block; /* Prevent image from being inline-block (removes extra space) */
 }
+/* Loading Overlay */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000; /* Higher than slideshow image */
+}
+
+/* Spinner Style */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1); /* Light grey */
+    border-left-color: #000; /* Black */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite; /* Spinner animation */
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Hide the overlay after loading */
+.loading-overlay.hidden {
+    display: none;
+}
+
+/* Existing Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
+    width: 100vw;
+}
+
+/* Slideshow Container */
+.slideshow-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+}
+
+.slideshow-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Additional existing styles... */
+
 
 /* Navigation styling */
 .navigation {

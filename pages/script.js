@@ -10,7 +10,11 @@ $(document).ready(function () {
   let isZoomedIn = false;
   let isDragging = false;
   let startX = 0;
-  const minSwipeDistance = 8;
+  let currentX = 0;
+  let swipeVelocity = 0;
+  let lastTime = 0;
+  const minSwipeDistance = 50; // Minimum distance for swipe detection
+  const swipeThreshold = 0.3; // Speed threshold for swipe to register
 
   const $slider = $('#image-slider');
   $slider.attr('max', totalImages);
@@ -18,6 +22,11 @@ $(document).ready(function () {
 
   // Initial image load
   loadImage(currentIndex);
+
+  // Hide loading overlay after 3 seconds
+  setTimeout(() => {
+    $('.loading-overlay').addClass('hidden');
+  }, 3000); // 3 seconds delay
 
   const nextImage = () => {
     currentIndex = (currentIndex % totalImages) + 1;
@@ -29,6 +38,10 @@ $(document).ready(function () {
     currentIndex = (currentIndex - 2 + totalImages) % totalImages + 1;
     loadImage(currentIndex);
     $slider.val(currentIndex);
+  };
+
+  const calculateSwipeVelocity = (distance, time) => {
+    return distance / time;
   };
 
   $slider.on('input', function () {
@@ -65,14 +78,27 @@ $(document).ready(function () {
   $('.slideshow-container').on('mousedown', function (e) {
     if (e.button !== 0) return;
     startX = e.clientX;
+    currentX = startX;
     isDragging = true;
+    lastTime = Date.now();
   });
 
   $('.slideshow-container').on('mousemove', function (e) {
     if (!isDragging) return;
-    const swipeDistance = e.clientX - startX;
-    if (Math.abs(swipeDistance) > minSwipeDistance) {
-      swipeDistance < 0 ? nextImage() : prevImage();
+    const swipeDistance = e.clientX - currentX;
+    currentX = e.clientX;
+    const currentTime = Date.now();
+    const timeDiff = currentTime - lastTime;
+    lastTime = currentTime;
+
+    swipeVelocity = calculateSwipeVelocity(swipeDistance, timeDiff);
+
+    if (Math.abs(swipeDistance) > minSwipeDistance || Math.abs(swipeVelocity) > swipeThreshold) {
+      if (swipeDistance < 0) {
+        nextImage();
+      } else {
+        prevImage();
+      }
       startX = e.clientX;
     }
   });
@@ -83,14 +109,27 @@ $(document).ready(function () {
 
   $('.slideshow-container').on('touchstart', function (e) {
     startX = e.touches[0].clientX;
+    currentX = startX;
     isDragging = true;
+    lastTime = Date.now();
   });
 
   $('.slideshow-container').on('touchmove', function (e) {
     if (!isDragging) return;
-    const swipeDistance = e.touches[0].clientX - startX;
-    if (Math.abs(swipeDistance) > minSwipeDistance) {
-      swipeDistance < 0 ? nextImage() : prevImage();
+    const swipeDistance = e.touches[0].clientX - currentX;
+    currentX = e.touches[0].clientX;
+    const currentTime = Date.now();
+    const timeDiff = currentTime - lastTime;
+    lastTime = currentTime;
+
+    swipeVelocity = calculateSwipeVelocity(swipeDistance, timeDiff);
+
+    if (Math.abs(swipeDistance) > minSwipeDistance || Math.abs(swipeVelocity) > swipeThreshold) {
+      if (swipeDistance < 0) {
+        nextImage();
+      } else {
+        prevImage();
+      }
       startX = e.touches[0].clientX;
     }
   });
