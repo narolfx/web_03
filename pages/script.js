@@ -11,10 +11,8 @@ $(document).ready(function () {
   let isDragging = false;
   let startX = 0;
   let currentX = 0;
-  let swipeVelocity = 0;
-  let lastTime = 0;
-  const minSwipeDistance = 50; // Minimum distance for swipe detection
-  const swipeThreshold = 0.3; // Speed threshold for swipe to register
+  const rotationSensitivity = 0.2; // Sensitivity for the rotation speed
+  const imageChangeThreshold = 30; // Minimum distance in pixels to change the image
 
   const $slider = $('#image-slider');
   $slider.attr('max', totalImages);
@@ -23,10 +21,24 @@ $(document).ready(function () {
   // Initial image load
   loadImage(currentIndex);
 
-  // Hide loading overlay after 3 seconds
-  setTimeout(() => {
-    $('.loading-overlay').addClass('hidden');
-  }, 3000); // 3 seconds delay
+  // Function to handle orientation change
+  const checkOrientation = () => {
+    const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+    $('.slideshow-container').css('display', isLandscape ? 'block' : 'none');
+    $('.portrait-message').css('display', isLandscape ? 'none' : 'flex');
+    if (isLandscape) {
+      $('.loading-overlay').removeClass('hidden'); // Show loading overlay in landscape
+      setTimeout(() => {
+        $('.loading-overlay').addClass('hidden'); // Hide loading overlay after 4 seconds
+      }, 3000);
+    }
+  };
+
+  // Check orientation on load
+  checkOrientation();
+
+  // Handle resizing or orientation change
+  $(window).on('resize orientationchange', checkOrientation);
 
   const nextImage = () => {
     currentIndex = (currentIndex % totalImages) + 1;
@@ -38,10 +50,6 @@ $(document).ready(function () {
     currentIndex = (currentIndex - 2 + totalImages) % totalImages + 1;
     loadImage(currentIndex);
     $slider.val(currentIndex);
-  };
-
-  const calculateSwipeVelocity = (distance, time) => {
-    return distance / time;
   };
 
   $slider.on('input', function () {
@@ -76,74 +84,65 @@ $(document).ready(function () {
   });
 
   $('.slideshow-container').on('mousedown', function (e) {
-    if (e.button !== 0) return;
+    if (e.button !== 0) return; // Only respond to left mouse button
     startX = e.clientX;
     currentX = startX;
     isDragging = true;
-    lastTime = Date.now();
+    $(this).css('cursor', 'grabbing'); // Change cursor to grabbing
   });
 
-  $('.slideshow-container').on('mousemove', function (e) {
+  $(document).on('mousemove', function (e) {
     if (!isDragging) return;
-    const swipeDistance = e.clientX - currentX;
+
     currentX = e.clientX;
-    const currentTime = Date.now();
-    const timeDiff = currentTime - lastTime;
-    lastTime = currentTime;
+    const distanceMoved = currentX - startX;
 
-    swipeVelocity = calculateSwipeVelocity(swipeDistance, timeDiff);
-
-    if (Math.abs(swipeDistance) > minSwipeDistance || Math.abs(swipeVelocity) > swipeThreshold) {
-      if (swipeDistance < 0) {
-        nextImage();
-      } else {
+    if (Math.abs(distanceMoved) > imageChangeThreshold) {
+      if (distanceMoved > 0) {
         prevImage();
+      } else {
+        nextImage();
       }
-      startX = e.clientX;
+      startX = currentX; // Reset startX to current position after image change
     }
   });
 
-  $(document).on('mouseup mouseleave', function () {
-    isDragging = false;
+  $(document).on('mouseup', function () {
+    if (isDragging) {
+      isDragging = false;
+      $('.slideshow-container').css('cursor', 'grab'); // Change cursor back to grab
+    }
+  });
+
+  $(document).on('mouseleave', function () {
+    if (isDragging) {
+      isDragging = false;
+      $('.slideshow-container').css('cursor', 'grab'); // Change cursor back to grab
+    }
   });
 
   $('.slideshow-container').on('touchstart', function (e) {
     startX = e.touches[0].clientX;
     currentX = startX;
     isDragging = true;
-    lastTime = Date.now();
   });
 
   $('.slideshow-container').on('touchmove', function (e) {
     if (!isDragging) return;
-    const swipeDistance = e.touches[0].clientX - currentX;
     currentX = e.touches[0].clientX;
-    const currentTime = Date.now();
-    const timeDiff = currentTime - lastTime;
-    lastTime = currentTime;
+    const distanceMoved = currentX - startX;
 
-    swipeVelocity = calculateSwipeVelocity(swipeDistance, timeDiff);
-
-    if (Math.abs(swipeDistance) > minSwipeDistance || Math.abs(swipeVelocity) > swipeThreshold) {
-      if (swipeDistance < 0) {
-        nextImage();
-      } else {
+    if (Math.abs(distanceMoved) > imageChangeThreshold) {
+      if (distanceMoved > 0) {
         prevImage();
+      } else {
+        nextImage();
       }
-      startX = e.touches[0].clientX;
+      startX = currentX; // Reset startX to current position after image change
     }
   });
 
-  $(document).on('touchend', function () {
+  $(document).on('touchend touchcancel', function () {
     isDragging = false;
   });
-
-  const checkOrientation = () => {
-    const isLandscape = window.matchMedia("(orientation: landscape)").matches;
-    $('.slideshow-container').css('display', isLandscape ? 'block' : 'none');
-    $('.portrait-message').css('display', isLandscape ? 'none' : 'flex');
-  };
-
-  $(window).on('resize orientationchange', checkOrientation);
-  checkOrientation();
 });
