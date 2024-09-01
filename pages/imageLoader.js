@@ -17,32 +17,19 @@ export const preloadImage = (index) => {
   cache[index] = img; // Cache the preloaded image
 };
 
-// Function to load and display images with a loading icon
+// Function to load and display images from the cache or directly if not cached
 export const loadImage = (index) => {
   if (index < 1 || index > totalImages) return; // Ignore out-of-bounds indices
 
   currentIndex = index; // Update current index
   const $imageContainer = $('.slideshow-container');
   const imageElement = $('#slideshow-image');
-  const loadingIcon = $('#loading-icon'); // Assume there's a loading icon element in the HTML
-
-  // Show loading icon
-  loadingIcon.show();
 
   if (cache[index]) {
-    // Use cached image if available
-    imageElement.attr('src', cache[index].src);
-    loadingIcon.hide(); // Hide loading icon when image is loaded from cache
+    imageElement.attr('src', cache[index].src); // Use cached image if available
   } else {
-    const newImage = new Image();
-    newImage.src = `images/${index}.jpg`;
-
-    // When image loads, update the src and hide loading icon
-    newImage.onload = () => {
-      imageElement.attr('src', newImage.src);
-      loadingIcon.hide(); // Hide loading icon when image is fully loaded
-    };
-
+    const newImage = `images/${index}.jpg`;
+    imageElement.attr('src', newImage);
     preloadImage(index); // Preload the current image to cache it
   }
 
