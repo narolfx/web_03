@@ -13,7 +13,6 @@
     <!-- Header -->
     <header class="header">
         <div class="logo">
-            <!-- Wrap the logo image in a button element -->
             <button class="logo-button">
                 <img src="assets/icons/logo.png" alt="Logo">
             </button>
@@ -26,21 +25,20 @@
     </header>
 
     <!-- Top Space -->
-    <div class="top-space">
-        
-    </div>
+    <div class="top-space"></div>
 
     <!-- Image Slideshow Container for Landscape Mode -->
     <div class="slideshow-container">
         <img id="slideshow-image" src="images/1.jpg" alt="Slideshow Image">
-        
-        <!-- Slider and Buttons Container -->
         <div class="controls-container">
             <button id="zoom-button" class="control-button">
                 <i class="fas fa-search-plus"></i>
             </button>
+            <!-- New Slider Element -->
             <input type="range" id="image-slider" class="image-slider" min="1" max="61" value="1">
-             
+            <button id="play-button" class="control-button">
+                <i class="fas fa-play"></i>
+            </button>
         </div>
     </div>
 
@@ -67,7 +65,8 @@
         <i class="fas fa-rotate-right rotate-icon"></i>
     </div>
 
-    <script src="script.js"></script>
-    <script src="playButton.js"></script> <!-- Add new script here -->
+    <!-- JavaScript Files -->
+    <script src="script.js" type="module"></script> <!-- Combined Script -->
+     
 </body>
 </html>
